@@ -21,10 +21,10 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import { DarkModeSwitch } from './DarkModeSwitch'
 
 import dynamic from 'next/dynamic';
-  const WalletButton = dynamic(() => import('../components/ConnectWallet'), {
+  const WalletButton = dynamic(() => import('./ConnectWallet'), {
     ssr: false,
   });
 export default function WithSubnavigation() {

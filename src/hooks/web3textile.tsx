@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
+
 const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
@@ -22,7 +23,7 @@ const providerOptions = {
       const [provider, setProvider] = useState(undefined);
       const [error, setError] = useState(null);
 
-      if( web3Modal.cacheProvider && !provider ) {
+      if( web3Modal.cachedProvider && !provider ) {
           connectWallet();
       }
 
