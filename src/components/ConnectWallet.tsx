@@ -2,7 +2,7 @@ import { useWeb3modal } from "../hooks/web3";
 import React, { useEffect, useState } from 'react';
 import Blockies from 'react-blockies' ;
 import { GrConnect, GrLink } from 'react-icons/gr'
-import { Button, useToast } from "@chakra-ui/react"
+import { Button, useToast,  useClipboard } from "@chakra-ui/react"
 import { PrivateKey } from '@textile/hub'
 import { BigNumber, providers, utils, ethers } from 'ethers'
 import { hashSync } from 'bcryptjs'
@@ -20,14 +20,15 @@ const ConnectWallet = () => {
     const { connectWallet, disconnectWallet, provider, error } = useWeb3modal();
     const [ appsecret, setSecret ] = useState('secret');
     const [ appSigner, setSigner ] = useState(Object);
+    const Toast = useToast();
 
     useEffect(() => {
         const getSignerAddress = async() => {
             const signer = await provider.getSigner();
             const accounts = await (window as WindowInstanceWithEthereum).ethereum.request({ method: 'eth_requestAccounts' });
-    if (accounts.length === 0) {
-      throw new Error('No account is provided. Please provide an account to this application.');
-    }
+            if (accounts.length === 0) {
+              throw new Error('No account is provided. Please provide an account to this application.');
+            }
             const address = await signer.getAddress();
             SetSignerAddress(address);
             setSigner(signer)
@@ -39,8 +40,13 @@ const ConnectWallet = () => {
     }, [provider])
 
     const handleConnect =  async () => {
+
         console.log("handleConnect fn")
         await connectWallet();
+        const identity = await generatePrivateKey();
+        setSidentity(identity.public.toString())
+
+        alert("user identity: " + identity)
     }
     
     const handleDisconnect = () => {
@@ -102,7 +108,7 @@ const ConnectWallet = () => {
         const metamask = await {address: signerAddress, signer: appSigner}
         // avoid sending the raw secret by hashing it first
         const secret = hashSync(appsecret, 10)
-        const message = generateMessageForEntropy(metamask.address, 'textile-demo', secret)
+        const message = generateMessageForEntropy(signerAddress, 'textile-identity', secret)
         const signedText = await metamask.signer.signMessage(message);
         const hash = utils.keccak256(signedText);
         if (hash === null) {
@@ -130,12 +136,18 @@ const ConnectWallet = () => {
       }
     
       const createNotification = (identity: PrivateKey) => {
-          return (
-        useToast({ name: "create-notification", detail: {
-          id: 1,
-          description: `PubKey: ${identity.public.toString()}. Your app can now generate and reuse this users PrivateKey for creating user Mailboxes, Threads, and Buckets.`,
-          timeout: 5000,
-        }}) );
+        return (
+        Toast(
+        {
+          title: "Account authorized.",
+          description: `PubKey: ${identity.public.toString()}. ${<Blockies seed="ifi" size={8} scale={3} />} Your app can now generate and reuse this users PrivateKey for creating user Mailboxes, Threads, and Buckets.`,
+          status: "success",
+          isClosable: true,
+        }
+               
+        ) 
+       
+        );
       }
     return(
     <Button  colorScheme="pink" variant="solid"
