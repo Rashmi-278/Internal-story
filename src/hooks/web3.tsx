@@ -18,12 +18,12 @@ const providerOptions = {
     providerOptions,
   });
 
-  export function useWeb3modal() {
+  export  function useWeb3modal() {
       const [provider, setProvider] = useState(undefined);
       const [error, setError] = useState(null);
 
       if( web3Modal.cachedProvider && !provider ) {
-          connectWallet();
+         connectWallet();
       }
 
       async function connectWallet() {

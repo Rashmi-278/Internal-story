@@ -104,11 +104,13 @@ const ConnectWallet = () => {
         return signer
       }
       const generatePrivateKey = async (): Promise<PrivateKey> => {
-        const metamask = await {address: signerAddress, signer: appSigner}
+        const metamask = {address: signerAddress, signer: appSigner}
         // avoid sending the raw secret by hashing it first
         const secret = hashSync(appsecret, 10)
         const message = generateMessageForEntropy('textile-identity', secret)
+        
         const signedText = await metamask.signer.signMessage(message);
+        
         const hash = utils.keccak256(signedText);
         if (hash === null) {
           throw new Error('No account is provided. Please provide an account to this application.');
