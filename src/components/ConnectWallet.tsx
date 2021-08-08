@@ -44,16 +44,15 @@ const ConnectWallet = () => {
         console.log("handleConnect fn")
         await connectWallet();
         const identity = await generatePrivateKey();
-        setSidentity(identity.public.toString())
 
-        alert("user identity: " + identity)
+        Toast({title: 'Textile identity' , description: `${identity}`, isClosable: true, status:'success'})
     }
     
     const handleDisconnect = () => {
         disconnectWallet();
     }
 
-    const generateMessageForEntropy = (ethereum_address: String, application_name: string, secret: string): string => {
+    const generateMessageForEntropy = ( application_name: string, secret: string): string => {
         return (
           '******************************************************************************** \n' +
           'READ THIS MESSAGE CAREFULLY. \n' +
@@ -64,7 +63,7 @@ const ConnectWallet = () => {
           '******************************************************************************** \n' +
           'The Ethereum address used by this application is: \n' +
           '\n' +
-          ethereum_address +
+           signerAddress +
           '\n' +
           '\n' +
           '\n' +
@@ -108,7 +107,7 @@ const ConnectWallet = () => {
         const metamask = await {address: signerAddress, signer: appSigner}
         // avoid sending the raw secret by hashing it first
         const secret = hashSync(appsecret, 10)
-        const message = generateMessageForEntropy(signerAddress, 'textile-identity', secret)
+        const message = generateMessageForEntropy('textile-identity', secret)
         const signedText = await metamask.signer.signMessage(message);
         const hash = utils.keccak256(signedText);
         if (hash === null) {
