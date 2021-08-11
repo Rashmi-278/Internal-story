@@ -14,7 +14,7 @@ export default async function productList(req, res) {
   let products: any = [];
   let threads: any = [];
   try {
-    const query = new Where('_id').eq("*")
+    const query = new Where('_id').eq("PD1")
     products = await T.listProducts({ query:query, key: M.testKey, threadID: M.testThreadId });
     //T.createCollection({ key: M.testKey, threadID: M.testThreadId });
     //products = await T.listCollections({ key: M.testKey, threadID: M.testThreadId });
