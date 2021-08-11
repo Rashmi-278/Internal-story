@@ -6,7 +6,12 @@ import { Button, useToast,  useClipboard } from "@chakra-ui/react"
 import { PrivateKey } from '@textile/hub'
 import { BigNumber, providers, utils, ethers } from 'ethers'
 import { hashSync } from 'bcryptjs'
+import { authorize } from '../textile/initUser'
+import {KeyInfo} from '@textile/hub';
 
+const keyinfo: KeyInfo = {
+  key: 'bvrmnjz2hogrio7imx3bajnfg5u', //insecure 
+}
 
 type WindowInstanceWithEthereum = Window & typeof globalThis & { ethereum?: providers.ExternalProvider };
 
@@ -46,7 +51,9 @@ const ConnectWallet = () => {
         const identity = await generatePrivateKey();
 
         Toast({title: 'Textile identity' , description: `${identity}`, isClosable: true, status:'success'})
-    }
+        // init user with texile hub
+        authorize(keyinfo,identity);
+      }
     
     const handleDisconnect = () => {
         disconnectWallet();
