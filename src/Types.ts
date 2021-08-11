@@ -1,6 +1,33 @@
 import { Buckets, Identity, UserAuth } from '@textile/hub'
 
-export interface Product {
+export const testKey = "bbaareqhhfwqmg6555iinyzfayrbw2mlovtjnhitmwnmynaxykigz7kburgwgakaodlcpkeqc6p23uljdyftgfganekatm6tzwjcwgdbuyoosk";
+export const testThreadId = "bafk35hsmfrz27tjktnga237cq5u7d7hobbshasnkh5vrhk7n5zzwqfi";
+export interface InternalBase {
+  key: object
+}
+
+export const productSchema = {
+  title: "Products",
+  type: "object",
+  required: ["_id"],
+  properties: {
+    _id: {
+      type: "string",
+      description: "The instance's id.",
+    },
+    name: {
+      type: "string",
+      description: "The product name.",
+    },
+    brand: {
+      description: "The manufacturer of the product",
+      type: "string"
+    },
+  },
+}
+
+
+export interface Product extends InternalBase {
   brand: string
   name: string
   itemUrl: string
@@ -19,12 +46,12 @@ export interface Product {
   availability: number
 }
 
-export interface Category {
+export interface Category extends InternalBase {
   category: string
   subcategory: string
 }
 
-export interface Payment {
+export interface Payment extends InternalBase {
   source: string
   type: string
   paymentId: number
@@ -36,29 +63,29 @@ export interface Payment {
 
 }
 
-export interface ExchangeRate {
+export interface ExchangeRate extends InternalBase {
   currency: string
   oneUsdEquals: number
 }
 
-export interface Price {
+export interface Price extends InternalBase {
   amount: number
   currency: string
 }
 
-export interface Weight {
+export interface Weight extends InternalBase {
   quantity: number
   unit: string
 }
 
-export interface AuditLog  {
+export interface AuditLog extends InternalBase  {
   createdBy: string
   updatedBy: string
   createdOn: Date
   updatedOn: Date
 }
 
-export interface Order {
+export interface Order extends InternalBase {
     status: string
     cart: Cart
     userEmail: string
@@ -68,19 +95,19 @@ export interface Order {
     auditLog: AuditLog
 }
 
-export interface Comments {
+export interface Comments extends InternalBase {
   content: string
   auditLog: AuditLog
 }
 
-export interface Cart {
+export interface Cart extends InternalBase {
   products: Array<Product>
   counts: number
   aggregatedWeight: number
   aggregatedPrice: number
 }
 
-export interface Address {
+export interface Address extends InternalBase {
   firstName: string
   lastName: string
   addressLine1: string
@@ -102,4 +129,18 @@ export interface AppState {
   www?: string
   url?: string
   ipns?: string
+}
+
+export interface Person {
+  _id: string
+  firstName: string
+  lastName: string
+}
+
+const createSamplePerson = (): Person => {
+  return {
+    _id: '',
+    firstName: 'Adam',
+    lastName: 'Doe',
+  }
 }
