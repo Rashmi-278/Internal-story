@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
+import Navbar from '../components/ui/Navbar'
+import Hero from '../components/ui/Hero'
 
 export default function test(){
  return(
