@@ -293,6 +293,7 @@ export const productSchema = {
 
 
 export interface Product extends InternalBase {
+    _id: string,
   brand: string
   name: string
   itemUrl: string
