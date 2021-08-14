@@ -1,7 +1,7 @@
 import * as U from "@common/utilities";
 import * as M from "@root/Types";
 
-import { Buckets, PrivateKey, Filecoin, Client, ThreadID,Identity, UserAuth } from "@textile/hub";
+import { Buckets, PrivateKey, Filecoin, Client, ThreadID,Identity, UserAuth, Where } from "@textile/hub";
 
 const GB_BYTES = 104857600 * 10;
 
@@ -153,6 +153,33 @@ export const addProduct = async (options) => {
   const client = await setupThreadClient(options.key);
   const threadID = ThreadID.fromString(options.threadID)
   return await client.create(threadID, 'products', [options.product])
+}
+export const deleteProduct = async (options) => {
+  const client = await setupThreadClient(options.key);
+  const threadID = ThreadID.fromString(options.threadID)
+  const query = new Where('_id').eq(options.productId)
+  const result = await client.find<M.Product>(threadID, 'products', query)
+
+  if (result.length < 1) return
+
+  const ids = await result.map((instance) => instance._id)
+  await client.delete(threadID, 'products', ids)
+  return;
+}
+export const updateProduct = async (options) => {
+  const client = await setupThreadClient(options.key);
+  const threadID = ThreadID.fromString(options.threadID)
+  const query = new Where('_id').eq(options.product._id)
+  const result = await client.find<M.Product>(threadID, 'products', query)
+
+  if (result.length < 1) return
+
+  const ids = await result.map((instance) => instance._id)
+  const products = result[0];
+
+
+  await client.save(threadID, 'products', [options.product]);
+  return;
 }
 
 
