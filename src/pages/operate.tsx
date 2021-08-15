@@ -210,7 +210,7 @@ export default function Component() {
                   </FormControl>
 
 
-                  <FormControl id="about" mt={1} as={GridItem} colSpan={6}>
+                  {/* <FormControl id="about" mt={1} as={GridItem} colSpan={6}>
                     <FormLabel
                       fontSize="sm"
                       fontWeight="md"
@@ -231,7 +231,7 @@ export default function Component() {
                     </FormHelperText>
                   </FormControl>
 
-                  
+                   */}
                 </SimpleGrid>
               </Stack>
               <Box
