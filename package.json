@@ -17,6 +17,7 @@
     "@textile/hub": "^6.2.0",
     "@walletconnect/web3-provider": "^1.4.1",
     "bcryptjs": "^2.4.3",
+    "busboy": "^0.3.1",
     "cors": "^2.8.5",
     "ethers": "^5.4.4",
     "etherspot": "^1.15.0",

@@ -29,9 +29,27 @@ import { FaUser } from "react-icons/fa";
 import Navbar from '../components/ui/Navbar'
 
 export default function Component() {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title: 'React Hooks POST Request Example' })
+  };
+
+  function createProduct(){
+
+  }
+
+  function updateProduct(){
+
+  }
+
+  function deleteProduct(){
+
+  }
+
   return (
       <>
-           <Navbar/>
+    <Navbar/>
 
     <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
       
@@ -66,7 +84,7 @@ export default function Component() {
           </GridItem>
           <GridItem mt={[5, null, 0]} colSpan={{ md: 2 }}>
             <chakra.form
-             
+             onSubmit={createProduct}
               method="POST"
               shadow="base"
               rounded={[null, "md"]}

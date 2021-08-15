@@ -10,7 +10,6 @@ import {
     ListIcon,
     Button,
     useColorModeValue,
-    useToast
   } from '@chakra-ui/react';
   import { CheckIcon } from '@chakra-ui/icons';
   import  showAddress  from '@root/pillar/showAddress';
@@ -21,13 +20,9 @@ import {
 
   let sdk: Sdk
 
-  
-  
-
-
-
   export async function getStaticProps(context) {
     const payAddress = await showAddress();
+    
 
     return {
       props: { payAddress : payAddress.address}, // will be passed to the page component as props
@@ -37,23 +32,14 @@ import {
 
 
   export default function ShowPaymentAddress(props) {
-    const toast = useToast()
 
     const [value, setValue] = useState(props.payAddress)
   const { hasCopied, onCopy } = useClipboard(value)
-  const transactionAlert = sdk.notifications$.subscribe(
-    eventData => { console.log('Event:', eventData);
+ 
 
-    
-    toast({
-        title: "Transaction",
-          description: eventData.type,
-          status: "info",
-          duration: 9000,
-          isClosable: true,
-      })
-}
-  );
+
+
+  
 
     return (
     <>
