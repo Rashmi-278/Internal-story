@@ -1,6 +1,7 @@
 import { DarkModeSwitch } from './DarkModeSwitch'
 import React from "react";
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
   const WalletButton = dynamic(() => import('../ConnectWallet'), {
     ssr: false,
   });
@@ -53,15 +54,26 @@ export default function Gslr() {
               color="brand.500"
               display={{ base: "none", md: "inline-flex" }}
             >
-              <Button variant="ghost">Features</Button>
-              <Button variant="ghost">Pricing</Button>
-              <Button variant="ghost">Blog</Button>
-              <Button variant="ghost">Company</Button>
-              <Button variant="ghost">Sign in</Button>
-              <WalletButton/>
+             <Link href='/products'>
+                <Button w="full" variant="ghost">
+                  Products
+                </Button>
+                </Link>
+                <Link href='/operate'>
+                <Button w="full" variant="ghost">
+                  Manage
+                </Button>
+                </Link>
+                <Link href='/wallet'>
+                <Button w="full" variant="ghost">
+                  Payment
+                </Button>
+                </Link>
+
               
             </HStack>
-            
+            <WalletButton/>
+
             <Box display={{ base: "inline-flex", md: "none" }}>
               <IconButton
                 display={{ base: "flex", md: "none" }}
@@ -92,19 +104,23 @@ export default function Gslr() {
                   aria-label="Close menu"
                   onClick={mobileNav.onClose}
                 />
-
+                <Link href='/products'>
                 <Button w="full" variant="ghost">
-                  Features
+                  Products
                 </Button>
+                </Link>
+                <Link href='/operate'>
                 <Button w="full" variant="ghost">
-                  Pricing
+                  Manage
                 </Button>
+                </Link>
+                <Link href='/wallet'>
                 <Button w="full" variant="ghost">
-                  Blog
+                  Payment
                 </Button>
-                <Button w="full" variant="ghost">
-                  Company
-                </Button>
+                </Link>
+                
+                
                 <WalletButton/>
                 <DarkModeSwitch/>
 

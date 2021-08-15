@@ -7,6 +7,7 @@ import {
   Button,
   Stack,
   Icon,
+  Image,
   useColorModeValue,
   createIcon,
 } from '@chakra-ui/react';
@@ -27,17 +28,20 @@ export default function CallToActionWithAnnotation() {
           textAlign={'center'}
           spacing={{ base: 8, md: 14 }}
           py={{ base: 20, md: 36 }}>
+
           <Heading
             fontWeight={600}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+            fontSize={{ base: '2xl', sm: '4xl', md: '5xl' }}
             lineHeight={'110%'}>
-            Get started with your <br />
+            Get started with managing your <br />
             <Text as={'span'} color={'green.400'}>
-              Nextjs Dapp
+              store
             </Text>
           </Heading>
+          <Image src="logo.png" alt="logo" width='100' />
+
           <Text color={'gray.500'} fontSize="2xl">
-            Use this NextJS Truffle Starter with basic wallet connectivity feature using web3modal to get a headstart on your development.
+            Use this Inventory management system
           </Text>
           <Text color={'gray.400'} fontSize="xl">
             Note: It takes a few seconds for Connect Wallet Button to load on IPFS hosting.     
@@ -57,14 +61,10 @@ export default function CallToActionWithAnnotation() {
               _hover={{
                 bg: 'green.500',
               }}>
-              Get Started
+              Get Started with connecting your wallet
             </Button>
             </a>
-            <a href="https://blog.fleek.co/posts/fleek-nextJS">
-            <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              Deploy on Fleek
-            </Button>
-            </a>
+            
             <Box>
               <Icon
                 as={Arrow}
@@ -81,7 +81,7 @@ export default function CallToActionWithAnnotation() {
                 right={'-125px'}
                 top={'-15px'}
                 transform={'rotate(10deg)'}>
-                Clone the repository now !
+                Would like to contribute ? Clone the repository now !
               </Text>
             </Box>
           </Stack>
