@@ -10,12 +10,22 @@ import {
     ListIcon,
     Button,
     useColorModeValue,
+    useToast
   } from '@chakra-ui/react';
   import { CheckIcon } from '@chakra-ui/icons';
   import  showAddress  from '@root/pillar/showAddress';
   import { useClipboard } from "@chakra-ui/react"
   import Navbar from '../components/ui/Navbar'
-import { useState } from 'react';
+  import { useState } from 'react';
+  import { Sdk } from 'etherspot';
+
+  let sdk: Sdk
+
+  
+  
+
+
+
   export async function getStaticProps(context) {
     const payAddress = await showAddress();
 
@@ -27,8 +37,23 @@ import { useState } from 'react';
 
 
   export default function ShowPaymentAddress(props) {
+    const toast = useToast()
+
     const [value, setValue] = useState(props.payAddress)
   const { hasCopied, onCopy } = useClipboard(value)
+  const transactionAlert = sdk.notifications$.subscribe(
+    eventData => { console.log('Event:', eventData);
+
+    
+    toast({
+        title: "Transaction",
+          description: eventData.type,
+          status: "info",
+          duration: 9000,
+          isClosable: true,
+      })
+}
+  );
 
     return (
     <>
@@ -73,7 +98,7 @@ import { useState } from 'react';
               
               <ListItem>
                 <ListIcon as={CheckIcon} color="green.400" />
-                Make sure to verify your transaction
+                Make sure to verify your transaction , upon successful transaction , an alert will be displayed on this page.
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckIcon} color="green.400" />
