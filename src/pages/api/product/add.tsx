@@ -13,7 +13,7 @@ export default async function productList(req, res) {
 
   let products: any = [];
   try {
-    const product = {_id:"PD1", name:"shoe", brand:"nike"};
+    const product = {_id:"PD1", name:"shoe", brand:"nike" , price:"522" };
     const query = new Where('_id').eq(product._id)
     products = await T.addProduct({ key: M.testKey, threadID: M.testThreadId,product, query })
   } catch (e) {

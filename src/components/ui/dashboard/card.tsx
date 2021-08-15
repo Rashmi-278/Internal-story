@@ -1,7 +1,7 @@
 import React from "react";
 import { chakra, Box, Flex, useColorModeValue } from "@chakra-ui/react";
 
-const Ma = () => {
+const Ma = (props) => {
   return (
     <Flex
       bg={useColorModeValue("#F9FAFB", "gray.600")}
@@ -27,7 +27,7 @@ const Ma = () => {
           bgPos="center"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1521903062400-b80f2cb8cb9d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80)",
+              `url(${props.url})`,
           }}
         ></Box>
 
@@ -47,7 +47,7 @@ const Ma = () => {
             color={useColorModeValue("gray.800", "white")}
             letterSpacing={1}
           >
-            Nike Revolt
+            {props.name}
           </chakra.h3>
 
           <Flex
@@ -61,7 +61,7 @@ const Ma = () => {
               fontWeight="bold"
               color={useColorModeValue("gray.800", "gray.200")}
             >
-              $129
+             $ {props.price}
             </chakra.span>
             <chakra.button
               bg="gray.800"
